@@ -11,7 +11,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 visor.value = '';
             } else if (valor === '=') {
                 try {
-                    visor.value = eval(visor.value.replace(/x/g, '*').replace(/÷/g, '/'));
+                    // Substitui os símbolos de multiplicação e divisão
+                    const expressao = visor.value.replace(/x/g, '*').replace(/÷/g, '/');
+
+                    // Usa uma função para calcular a expressão de forma segura
+                    const resultado = Function(`'use strict'; return (${expressao})`)();
+                    
+                    visor.value = resultado;
                 } catch {
                     visor.value = 'Erro';
                 }
