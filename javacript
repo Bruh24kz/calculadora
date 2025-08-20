@@ -1,0 +1,23 @@
+document.addEventListener('DOMContentLoaded', () => {
+    const visor = document.querySelector('.visor');
+    const botoes = document.querySelector('.botoes');
+
+    botoes.addEventListener('click', (event) => {
+        const target = event.target;
+        if (target.tagName === 'BUTTON') {
+            const valor = target.textContent;
+
+            if (valor === 'AC') {
+                visor.value = '';
+            } else if (valor === '=') {
+                try {
+                    visor.value = eval(visor.value.replace(/x/g, '*').replace(/÷/g, '/'));
+                } catch {
+                    visor.value = 'Erro';
+                }
+            } else {
+                visor.value += valor;
+            }
+        }
+    });
+});
